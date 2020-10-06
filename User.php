@@ -10,7 +10,9 @@
 			$this->login = $login;
 			$this->email = $email;
 			$this->myHasch($password);
-			echo ($this->password);
+			/*echo ($this->password);*/
+			$this->safe($name, $login, $password, $email);	
+
 
 		}
 
@@ -20,7 +22,7 @@
 			text@email.com
 			отправить письмо на почту дибилу который забыл свой пароль которое содержит ссылку ограниченного срока действия на страницу восстановления пароля
 			*/
-		};
+		}
 
 		protected function myHasch($password){
 			$tmp = '';
@@ -62,6 +64,27 @@
 			$this->email = $email;
 		}
 
+		public function searchUser($login){
+			if(!file_exists("user.txt")){
+				$fh = fopen("user.txt", "a");
+				$usersFile = file("user.txt");
+				var_dump($usersFile);
+			}
+		}
+
+		public function safe($name, $login, $password, $email){
+			if(!file_exists("user.txt")){
+				die("error:not found");
+			}else{
+				//var_dump($usersFile);
+				$str = $login."|".$email."|".$password."|".$name."\r\n";
+				if(file_put_contents("user.txt", $str, FILE_APPEND)){
+					exit("summit user");
+				}else{
+					die("bad");
+				}
+			}
+		}
 	}
 
 	/*$user = new User();

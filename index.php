@@ -9,7 +9,8 @@ include("User.php");
 		
 		// print_r($_POST);
 		$objUser = new User($name, $login, $password, $email);
-		var_dump($objUser);
+		
+
 	}
  ?>
 <!DOCTYPE html>
@@ -27,6 +28,18 @@ include("User.php");
 		<label for="password">Пароль:</label><input type="password" name="password"><br>
 		<label for="email">email:</label><input type="email" name="email"><br>
 		<button type="submit">Отправить</button>
+
 	</form>	
+	<pre>
+	<?php 
+		print_r(file("user.txt"));
+		echo count(file("user.txt"));
+		$tmp = file("user.txt");
+		echo $tmp[0];
+		$tmp2 = explode("|", $tmp[0]);
+		print_r($tmp2);
+		var_dump( array_search("itasasu_kanon", $tmp2));
+	 ?>
+	</pre>
 </body>
 </html>
